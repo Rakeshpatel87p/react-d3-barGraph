@@ -23,24 +23,24 @@ class BarChart extends Component {
        .data(data)
        .enter()
        .append("rect")
-       .attr("x", (d, i) => i * 40) //d is dataPoint and i is index
-       .attr("y", (d,i) => height - 10 * d.polling)
+       .attr("x", (d, i) => i * 60) //d is dataPoint and i is index
+       .attr("y", (d,i) => height - 10 * d.polling - 25)
        .attr("width", 25)
        .attr("height", (d, i) => d.polling * 10)
-       .attr("fill", (d, i) => i % 2 ? '#ff5455' : '#ffaaaa');
+       .attr("fill", (d, i) => i % 2 ? '#4088ff' : '#77aafe');
 
     svg.selectAll("text")
        .data(data)
        .enter()
        .append("text")
        .text((d) => d.name)
-       .attr("x", (d, i) => i * 40)
-       .attr("y", (d, i) => height - (10 * d.polling) - 3)
+       .attr("x", (d, i) => i * 60)
+       .attr("y", (d, i) => height)
   }
   
   render() {
     return (
-      <h1>Hello Rakesh, we're all set for D3</h1>
+      <h1>Whose Ahead in Iowa?</h1>
     )
   }
 }
