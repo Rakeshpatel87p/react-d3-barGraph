@@ -7,7 +7,16 @@ import './App.css';
 class BarChart extends Component {
   
   componentDidMount() {
-    this.drawChart();
+    fetch('https://jsonplaceholder.typicode.com/todos')
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result);
+          this.drawChart();
+        },
+        (error) => console.log(error)
+      
+      );
   }
 
   drawChart() {
@@ -23,7 +32,7 @@ class BarChart extends Component {
                     .scale(scale)
                     .ticks(5);
     
-    const svg = d3.select("body") //Creates target to hook into
+    const svg = d3.select(".barChart") //Creates target to hook into
                   .append("svg") //hooks node into DOM
                   .attr("width", 700)
                   .attr("height", height)
@@ -53,7 +62,10 @@ class BarChart extends Component {
   
   render() {
     return (
-      <h1>Whose Ahead in Iowa?</h1>
+      <div>
+        <h1>Whose Ahead in Iowa?</h1>
+        <div className="barChart"></div>
+      </div>
     )
   }
 }
