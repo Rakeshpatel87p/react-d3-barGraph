@@ -12,7 +12,17 @@ class BarChart extends Component {
 
   drawChart() {
     const data = this.props.dataPoints;
-    const height = 500
+    const height = 500;
+    const width = 700;
+    
+    const scale = d3.scaleLinear()
+                    .domain([0, d3.max(data)])
+                    .range([0, height]);
+
+    const yAxis = d3.axisLeft()
+                    .scale(scale)
+                    .ticks(5);
+    
     const svg = d3.select("body") //Creates target to hook into
                   .append("svg") //hooks node into DOM
                   .attr("width", 700)
@@ -28,14 +38,17 @@ class BarChart extends Component {
        .attr("width", 25)
        .attr("height", (d, i) => d.polling * 10)
        .attr("fill", (d, i) => i % 2 ? '#4088ff' : '#77aafe');
-
+  
     svg.selectAll("text")
        .data(data)
        .enter()
        .append("text")
        .text((d) => d.name)
        .attr("x", (d, i) => i * 60)
-       .attr("y", (d, i) => height)
+       .attr("y", (d, i) => height);
+
+    svg.append('g')
+       .call(yAxis);
   }
   
   render() {

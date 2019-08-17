@@ -4,7 +4,6 @@ import './index.css';
 import BarChart from './BarChart';
 import * as serviceWorker from './serviceWorker';
 
-//const data = [12, 5, 15, 20, 30];
 const data = [
     {
         name: 'Biden',
