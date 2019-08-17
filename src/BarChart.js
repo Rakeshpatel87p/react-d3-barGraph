@@ -11,7 +11,7 @@ class BarChart extends Component {
   }
 
   drawChart() {
-    const data = [12, 5, 15, 20, 30];
+    const data = this.props.dataPoints;
     const height = 500
     const svg = d3.select("body") //Creates target to hook into
                   .append("svg") //hooks node into DOM
@@ -24,18 +24,18 @@ class BarChart extends Component {
        .enter()
        .append("rect")
        .attr("x", (d, i) => i * 40) //d is dataPoint and i is index
-       .attr("y", (d,i) => height - 10 * d)
+       .attr("y", (d,i) => height - 10 * d.polling)
        .attr("width", 25)
-       .attr("height", (d, i) => d * 10)
-       .attr("fill", "green");
+       .attr("height", (d, i) => d.polling * 10)
+       .attr("fill", (d, i) => i % 2 ? '#ff5455' : '#ffaaaa');
 
     svg.selectAll("text")
        .data(data)
        .enter()
        .append("text")
-       .text((d) => d)
+       .text((d) => d.name)
        .attr("x", (d, i) => i * 40)
-       .attr("y", (d, i) => height - (10 * d) - 3)
+       .attr("y", (d, i) => height - (10 * d.polling) - 3)
   }
   
   render() {
