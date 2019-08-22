@@ -1,30 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
 import App from './App'
 import * as serviceWorker from './serviceWorker';
-
-const data = [
-    {
-        name: 'Biden',
-        polling: 25
-    },
-
-    {
-        name: 'Harris',
-        polling: 12
-    },
-
-    {
-        name: 'Warren',
-        polling: 35
-    },
-
-    {
-        name: 'Sanders',
-        polling: 15
-    }
-]
 
 ReactDOM.render(<App dataPoints={data} />, document.getElementById('root'));
 
