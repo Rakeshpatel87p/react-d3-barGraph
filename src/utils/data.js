@@ -1,4 +1,4 @@
-const data = [
+const PollingData = [
     {
         name: 'Biden',
         polling: 25
@@ -19,3 +19,5 @@ const data = [
         polling: 15
     }
 ]
+
+export default PollingData;
