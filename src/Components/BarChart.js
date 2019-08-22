@@ -60,7 +60,7 @@ class BarChart extends Component {
   render() {
     return (
       <div>
-        <h1>Whose Ahead in Iowa?</h1>
+        <h1>Displaying Polling from {this.props.stateToDisplay}</h1>
         <div className="barChart"></div>
       </div>
     )
