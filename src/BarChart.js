@@ -11,11 +11,9 @@ class BarChart extends Component {
       .then(res => res.json())
       .then(
         (result) => {
-          console.log(result);
           this.drawChart();
         },
         (error) => console.log(error)
-      
       );
   }
 
@@ -23,14 +21,11 @@ class BarChart extends Component {
     const data = this.props.dataPoints;
     const height = 500;
     const width = 700;
-    
+    let sortedDataByLeader = data.sort((a, b) => a.polling > b.polling ? -1 : 0)
+
     const scale = d3.scaleLinear()
                     .domain([0, d3.max(data)])
-                    .range([0, height]);
-
-    const yAxis = d3.axisLeft()
-                    .scale(scale)
-                    .ticks(5);
+                    .range([height, 0]);
     
     const svg = d3.select(".barChart") //Creates target to hook into
                   .append("svg") //hooks node into DOM
@@ -38,18 +33,22 @@ class BarChart extends Component {
                   .attr("height", height)
                   .style("margin-left", 100);
     
+    const yAxis = d3.axisLeft()
+      .scale(scale)
+      .ticks(5);
+    
     svg.selectAll("rect")
-       .data(data)
+       .data(sortedDataByLeader)
        .enter()
        .append("rect")
        .attr("x", (d, i) => i * 60) //d is dataPoint and i is index
-       .attr("y", (d,i) => height - 10 * d.polling - 25)
+       .attr("y", (d,i) => height - 10 * d.polling)
        .attr("width", 25)
        .attr("height", (d, i) => d.polling * 10)
        .attr("fill", (d, i) => i % 2 ? '#4088ff' : '#77aafe');
   
     svg.selectAll("text")
-       .data(data)
+       .data(sortedDataByLeader)
        .enter()
        .append("text")
        .text((d) => d.name)
