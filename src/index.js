@@ -17,12 +17,12 @@ const data = [
 
     {
         name: 'Warren',
-        polling: 10
+        polling: 35
     },
 
     {
         name: 'Sanders',
-        polling: 10
+        polling: 15
     }
 ]
 

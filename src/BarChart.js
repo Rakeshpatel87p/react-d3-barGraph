@@ -23,9 +23,7 @@ class BarChart extends Component {
     const width = 700;
     let sortedDataByLeader = data.sort((a, b) => a.polling > b.polling ? -1 : 0)
 
-    const scale = d3.scaleLinear()
-                    .domain([0, d3.max(data)])
-                    .range([height, 0]);
+    const scale = d3.scaleLinear().range([height, 0]);
     
     const svg = d3.select(".barChart") //Creates target to hook into
                   .append("svg") //hooks node into DOM
@@ -34,9 +32,8 @@ class BarChart extends Component {
                   .style("margin-left", 100);
     
     const yAxis = d3.axisLeft()
-      .scale(scale)
-      .ticks(5);
-    
+                    .scale(scale);
+
     svg.selectAll("rect")
        .data(sortedDataByLeader)
        .enter()
@@ -57,6 +54,9 @@ class BarChart extends Component {
 
     svg.append('g')
        .call(yAxis);
+    
+    svg.append("g")
+       .call(yAxis.ticks(10).tickSize("10px").tickFormat(d3.format("10%")))
   }
   
   render() {
